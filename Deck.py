@@ -12,17 +12,22 @@ class PlayingCard:
         self._suit = suit
         self._rank = rank
 
+    @property
+    def suit(self):  # getter, no setter
+        return self._suit
+
+    @property
+    def rank(self):  # getter, no setter
+        return self._rank
+
+    def __gt__(self, other):
+        return PlayingCard.RANKS.index(self.rank) > PlayingCard.RANKS.index(other.rank)
+
     def __str__(self):
         return f"{self._rank}{self._suit}" # so i can print the card
     def __repr__(self):
         return self.__str__()
 
-    @property
-    def suit(self): # getter, no setter
-        return self._suit
-    @property
-    def rank(self): #getter, no setter
-        return self._rank
 
 class Deck:
     def __init__(self):
