@@ -25,10 +25,19 @@ class PokerHand:
         Check if the hand is a flush
         :return: True or False
         """
-        for card in self._cards:
+        for card in self._cards[1:]:
             if self._cards[0].suit != card.suit:
                 return False
         return True
+
+    @property
+    def is_straight_flush(self):
+        return self.is_flush and self.is_straight
+
+    @property
+    def is_normal_flush(self):
+        return self.is_flush and not self.is_straight
+
 
     @property
     def num_matches(self):
@@ -84,15 +93,16 @@ class PokerHand:
 
 
 tries = 0
-total_hits = 100
+total_hits = 10
 hits = 0
 while True:
     hand = PokerHand()
     tries += 1
-    if hand.is_straight:
+    if hand.is_straight_flush:
         hits = hits + 1
+        print(hand)
     if hits == total_hits:
-        print(f"Probability of a straight is {hits/tries * 100}%")
+        print(f"Probability of a straight flush is {hits/tries * 100}%")
         break
 
 
